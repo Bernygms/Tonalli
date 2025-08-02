@@ -1,0 +1,20 @@
+RewriteEngine On
+
+Options All -Indexes
+
+IndexIgnore * 
+# En el caso que no se encuetre un archivo, redireccionamos
+# (IMPORTANTE!: reemplazar [DOMINIO] por el path completo al archivo error404.php)
+ErrorDocument 403 /pagina-404
+ErrorDocument 404 /pagina-404
+
+
+# ENLACES A ARCHIOS PHP SIN EXTENSION
+# Si no es archivo
+RewriteCond %{REQUEST_FILENAME} !-f
+# y no es directorio
+RewriteCond %{REQUEST_FILENAME} !-d
+# y si existe "{file}.php"
+RewriteCond %{REQUEST_FILENAME}.php -f
+# entonces reescribimos la URL y le agregamos ".php"
+RewriteRule ^(.*)$ $1.php [NC,L]

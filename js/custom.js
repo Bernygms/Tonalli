@@ -192,24 +192,25 @@ POTENZA.raindrops = function () {
 /*************************
   PHP Contact Form 
 *************************/
- POTENZA.contactform = function () {
-      $( "#contactform" ).submit(function( event ) {
-          $("#ajaxloader").show();
-          $("#contactform").hide();
-          $.ajax({
-            url:'php/contact-form.php',
-            data:$(this).serialize(),
-            type:'post',
-            success:function(response){
-              $("#ajaxloader").hide();
-              $("#contactform").show();
-              
-              $("#formmessage").html(response).show().delay(20000).fadeOut('slow');
-            }
-          });
-          event.preventDefault();
-        });
-    }
+POTENZA.contactform = function () {
+  $( "#contactform" ).submit(function( event ) {
+      $("#ajaxloader").show();
+      //$("#contactform").hide();
+      $.ajax({
+        //url:'php/contact-form.php',
+        url:'php/sendmsg.php',
+        data:$(this).serialize(),
+        type:'post',
+        success:function(response){
+          $("#ajaxloader").hide();
+          //$("#contactform").hide();
+
+          $("#formmessage").html(response).show().delay(20000).fadeOut('slow');
+        }
+      });
+      event.preventDefault();
+    });
+}
  
  /*************************
        counter
